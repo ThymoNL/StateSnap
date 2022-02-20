@@ -1,0 +1,4 @@
+# Ignore project files
+.idea/
+cmake-build-*/
+CmakeUserPresets.json
