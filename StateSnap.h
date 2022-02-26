@@ -20,6 +20,30 @@
 #ifndef STATESNAP_STATESNAP_H
 #define STATESNAP_STATESNAP_H
 
-void hello();
+#include "Orbitersdk.h"
+#include <thread>
+#include <mutex>
+
+class StateSnap : public oapi::Module {
+public:
+    StateSnap(HINSTANCE hDLL);
+    ~StateSnap();
+
+    void Runnable();
+
+    void clbkSimulationStart(RenderMode mode) override;
+    void clbkSimulationEnd() override;
+    void clbkPostStep(double simt, double simdt, double mjd) override;
+
+private:
+    char *filename;
+    int interval; // save interval in minutes
+
+    std::thread saveThread;
+    std::atomic<bool> threadExit;
+    std::atomic<bool> saveNeeded = false;
+    std::mutex mutex;
+    std::condition_variable cv;
+};
 
 #endif //STATESNAP_STATESNAP_H

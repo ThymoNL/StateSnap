@@ -17,10 +17,57 @@
  *     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#define ORBITER_MODULE
 #include "StateSnap.h"
+#include "Orbitersdk.h"
 
-#include <iostream>
+StateSnap::StateSnap(HINSTANCE hDLL) : Module(hDLL) {
+    // TODO: Read cfg file
+    filename = (char *)"StateSnap.scn";
+    interval = 10;
+}
 
-void hello() {
-    std::cout << "Hello, World!" << std::endl;
+StateSnap::~StateSnap() = default;
+
+void StateSnap::clbkSimulationStart(oapi::Module::RenderMode mode) {
+    threadExit = false;
+    saveThread = std::thread([this] { Runnable(); });
+    saveThread.detach();
+}
+
+void StateSnap::clbkSimulationEnd() {
+    threadExit = true;
+    cv.notify_all();
+}
+
+void StateSnap::Runnable() {
+    while (true) {
+        std::unique_lock<std::mutex> lk(mutex);
+        if (cv.wait_for(lk, std::chrono::minutes(interval), [this] { return threadExit.load(); })) {
+            break; // Woke up by exit
+        }
+
+        saveNeeded = true; // Signal to main thread.
+    }
+}
+
+void StateSnap::clbkPostStep(double simt, double simdt, double mjd) {
+    if (saveNeeded) {
+        oapiSaveScenario(filename, "");
+        saveNeeded = false;
+    }
+}
+
+// DLL entry/exit points
+StateSnap *module;
+
+DLLCLBK void InitModule(HINSTANCE hDLL)
+{
+    module = new StateSnap(hDLL);
+    oapiRegisterModule(module);
+}
+
+DLLCLBK void ExitModule(HINSTANCE hModule)
+{
+    // Module is deleted by Orbiter
 }
