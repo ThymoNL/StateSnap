@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(ORBITER_LIB_DIR ${ORBITER_SDK_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ORBITER_PLUGIN_DIR})
 
-add_library(StateSnap SHARED StateSnap.cpp)
+add_library(StateSnap SHARED StateSnap.cpp Resources.rc resource.h)
 
 target_include_directories(StateSnap
         PUBLIC ${ORBITER_SDK_DIR}/include)

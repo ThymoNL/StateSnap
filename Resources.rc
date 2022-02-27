@@ -1,0 +1,26 @@
+#include "resource.h"
+
+STRINGTABLE
+BEGIN
+    IDS_INFO                "StateSnap:\r\n\r\nThis plugin will periodically save the current scenario.\r\n\r\n
+    Author: Thymo van Beers\r\n\
+    Version: 0.1\r\n\
+    Source Code: https:\//github.com/ThymoNL/StateSnap\r\n\r\n
+        StateSnap - A module or Orbiter to periodically make scenario snapshots.\r\n
+        Copyright (C) 2022  Thymo van Beers\r\n
+        \r\n
+        This program is free software; you can redistribute it and/or modify\r\n
+        it under the terms of the GNU General Public License as published by\r\n
+        the Free Software Foundation; either version 2 of the License, or\r\n
+        (at your option) any later version.\r\n
+        \r\n
+        This program is distributed in the hope that it will be useful,\r\n
+        but WITHOUT ANY WARRANTY; without even the implied warranty of\r\n
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\r\n
+        GNU General Public License for more details.\r\n
+        \r\n
+        You should have received a copy of the GNU General Public License along\r\n
+        with this program; if not, write to the Free Software Foundation, Inc.,\r\n
+        51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.\r\n"
+    IDS_TYPE                "Tools and dialogs"
+END
