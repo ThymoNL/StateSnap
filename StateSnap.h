@@ -27,7 +27,7 @@
 class StateSnap : public oapi::Module {
 public:
     StateSnap(HINSTANCE hDLL);
-    ~StateSnap();
+    ~StateSnap() = default;
 
     void Runnable();
 

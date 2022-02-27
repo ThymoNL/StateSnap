@@ -23,11 +23,9 @@
 
 StateSnap::StateSnap(HINSTANCE hDLL) : Module(hDLL) {
     // TODO: Read cfg file
-    filename = (char *)"StateSnap.scn";
+    filename = (char *)"StateSnap";
     interval = 10;
 }
-
-StateSnap::~StateSnap() = default;
 
 void StateSnap::clbkSimulationStart(oapi::Module::RenderMode mode) {
     threadExit = false;
