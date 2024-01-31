@@ -2,7 +2,7 @@
 
 STRINGTABLE
 BEGIN
-    IDS_INFO                "StateSnap:\r\n\r\nThis plugin will periodically save the current scenario.\r\n\r\n
+    IDS_INFO                "StateSnap:\r\n\r\nThis plugin will save the current scenario every 10 minutes.\r\n\r\n
     Author: Thymo van Beers\r\n\
     Version: 0.1\r\n\
     Source Code: https:\//github.com/ThymoNL/StateSnap\r\n\r\n
